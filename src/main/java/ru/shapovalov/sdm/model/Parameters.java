@@ -1,39 +1,33 @@
 package ru.shapovalov.sdm.model;
 
 import lombok.*;
-import org.graalvm.compiler.lir.CompositeValue;
-import org.jboss.logging.Field;
-import org.w3c.dom.Comment;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
 @ToString(exclude="uuid")
 @EqualsAndHashCode(exclude="uuid")
-@Table(name = "object_type")
-public class ObjectType {
+@Table(name = "object_types")
+public class Parameters {
 
     @Getter
     @Setter
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "uuid", nullable = false)
-    private UUID uuid;
-
-    @Column(name = "parent", nullable = true)
-    private ObjectType parent;
+    @Column(name = "attribute_uuid")
+    private UUID attribute_uuid;
 
     @Getter
     @Setter
     @NonNull
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
     @Getter
     @Setter
-    @Column(name = "properties", nullable = true)
-    private String properties;
+    @Column(name = "value")
+    private String value;
 
     @Getter
     @Setter
@@ -45,4 +39,9 @@ public class ObjectType {
     @Setter
     @Column(name = "order_number", nullable = false)
     private int orderNumber;
+
+    @Getter
+    @Setter
+    @OneToMany(mappedBy = "attribute_uuid", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Parameters> parametersList;
 }
