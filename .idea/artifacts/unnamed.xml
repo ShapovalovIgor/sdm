@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="unnamed">
-    <output-path>$PROJECT_DIR$/out/artifacts/unnamed</output-path>
-    <root id="archive" name="unnamed.war" />
+  <artifact type="ear" name="unnamed">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="simplified_database_model-1.0-SNAPSHOT.jar" />
   </artifact>
 </component>

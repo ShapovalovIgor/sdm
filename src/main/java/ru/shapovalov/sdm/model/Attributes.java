@@ -16,8 +16,15 @@ public class Attributes {
     private UUID attribute_uuid;
 
     @NonNull
+    @OneToOne
     @Column(name = "attribute_type")
     private String attributeType;
+
+
+    @NonNull
+    @OneToMany
+    @Column(name = "attribute_type")
+    private String attributeManagment;
 
     @NonNull
     @Column(name = "name")
