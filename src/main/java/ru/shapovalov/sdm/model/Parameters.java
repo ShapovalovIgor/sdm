@@ -1,18 +1,15 @@
 package ru.shapovalov.sdm.model;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NonNull;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.UUID;
 
 @Data
+@AttributeOverride(name = "uuid", column = @Column(name = "uuid", updatable = false))
 @Table(name = "object_types")
-public class Parameters {
-
-    @Id
-    @Column(name = "attribute_uuid")
-    private UUID attribute_uuid;
+public class Parameters extends AbstractEntity{
 
     @NonNull
     @Column(name = "name")

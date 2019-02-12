@@ -1,19 +1,15 @@
 package ru.shapovalov.sdm.model;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NonNull;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.UUID;
-@Data()
-@RequiredArgsConstructor
-@Table(name = "objects")
-public class Objects {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "object_uuid")
-    private UUID object_uuid;
+@Data
+@AttributeOverride(name = "uuid", column = @Column(name = "uuid", updatable = false))
+@Table(name = "objects")
+public class Objects extends AbstractEntity {
 
     @ManyToOne
     @Column(name = "parent_uuid")

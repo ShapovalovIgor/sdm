@@ -6,8 +6,9 @@ import javax.persistence.*;
 import java.util.List;
 
 @Data
+@AttributeOverride(name = "uuid", column = @Column(name = "uuid", updatable = false))
 @Table(name = "object_to_attributes")
-public class ObjectToAttributes {
+public class ObjectToAttributes extends AbstractEntity{
 
     @Id
     @OneToMany
