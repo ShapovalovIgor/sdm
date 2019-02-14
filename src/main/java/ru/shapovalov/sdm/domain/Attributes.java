@@ -11,8 +11,8 @@ import javax.persistence.*;
 public class Attributes extends AbstractEntity{
 
     @NonNull
-    @ManyToOne
-    @Column(name = "object_to_attributes")
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="contract_uuid", nullable = false, foreignKey = @ForeignKey(name = "attributes_object_to_attributes_fk"))
     private ObjectToAttributes objectToAttributes;
 
     @NonNull
