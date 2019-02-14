@@ -1,10 +1,9 @@
-package ru.shapovalov.sdm.model;
+package ru.shapovalov.sdm.domain;
 
 import lombok.Data;
 import lombok.NonNull;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Data
 @AttributeOverride(name = "uuid", column = @Column(name = "uuid", updatable = false))
@@ -20,12 +19,6 @@ public class Attributes extends AbstractEntity{
     @OneToOne
     @Column(name = "attribute_type")
     private String attributeType;
-
-
-    @NonNull
-    @OneToMany
-    @Column(name = "attribute_management_uuid")
-    private UUID attributeManagementUUID;
 
     @NonNull
     @OneToMany

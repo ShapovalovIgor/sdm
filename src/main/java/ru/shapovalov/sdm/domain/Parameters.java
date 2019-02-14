@@ -1,4 +1,4 @@
-package ru.shapovalov.sdm.model;
+package ru.shapovalov.sdm.domain;
 
 import lombok.Data;
 import lombok.NonNull;
@@ -8,19 +8,15 @@ import java.util.List;
 
 @Data
 @AttributeOverride(name = "uuid", column = @Column(name = "uuid", updatable = false))
-@Table(name = "objects")
-public class Objects extends AbstractEntity {
-
-    @ManyToOne
-    @Column(name = "parent_uuid")
-    private Objects parent;
+@Table(name = "object_types")
+public class Parameters extends AbstractEntity{
 
     @NonNull
     @Column(name = "name")
     private String name;
 
-    @Column(name = "properties")
-    private String properties;
+    @Column(name = "value")
+    private String value;
 
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "version", nullable = false)
@@ -29,6 +25,6 @@ public class Objects extends AbstractEntity {
     @Column(name = "order_number", nullable = false)
     private int orderNumber;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Objects> childrenList;
+    @OneToMany(mappedBy = "attribute_uuid", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Parameters> parametersList;
 }

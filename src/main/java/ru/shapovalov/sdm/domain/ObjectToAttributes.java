@@ -1,4 +1,4 @@
-package ru.shapovalov.sdm.model;
+package ru.shapovalov.sdm.domain;
 
 import lombok.Data;
 
