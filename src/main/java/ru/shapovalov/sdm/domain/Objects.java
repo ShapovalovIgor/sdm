@@ -10,9 +10,10 @@ import java.util.List;
 @AttributeOverride(name = "uuid", column = @Column(name = "uuid", updatable = false))
 @Table(name = "objects")
 public class Objects extends AbstractEntity {
+    private static final long serialVersionUID = 8030321545840126735L;
 
-    @ManyToOne
-    @Column(name = "parent_uuid")
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="parent_uuid", nullable = true, foreignKey = @ForeignKey(name = "objects_objects_fk"))
     private Objects parent;
 
     @NonNull
@@ -29,6 +30,6 @@ public class Objects extends AbstractEntity {
     @Column(name = "order_number", nullable = false)
     private int orderNumber;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(mappedBy = "objects.uuid", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Objects> childrenList;
 }

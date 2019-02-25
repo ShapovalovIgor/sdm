@@ -9,6 +9,7 @@ import java.util.List;
 @AttributeOverride(name = "uuid", column = @Column(name = "uuid", updatable = false))
 @Table(name = "object_to_attributes")
 public class ObjectToAttributes extends AbstractEntity{
+    private static final long serialVersionUID = -3517438932304685119L;
 
     @Id
     @OneToMany
