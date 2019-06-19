@@ -1,11 +1,12 @@
 package ru.shapovalov.sdm.domain;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AttributeOverride(name = "uuid", column = @Column(name = "uuid", updatable = false))
 @Table(name = "object_to_attributes")
 public class ObjectToAttributes extends AbstractEntity{
@@ -13,7 +14,7 @@ public class ObjectToAttributes extends AbstractEntity{
 
     @Id
     @OneToMany
-    @Column(name = "attribute_managmet_uuid")
+    @Column(name = "attribute_management_uuid")
     private Attributes attributeManagmet;
 
     @Id
@@ -21,6 +22,7 @@ public class ObjectToAttributes extends AbstractEntity{
     @Column(name = "attribute_uuid")
     private Attributes attribute;
 
-    @OneToMany(mappedBy = "object_types", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<ObjectToAttributes> objetToAttributeList;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="object_uuid", nullable = true, foreignKey = @ForeignKey(name = "objects__objects_fk"))
+    private Objects objectId;
 }

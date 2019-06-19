@@ -1,19 +1,21 @@
 package ru.shapovalov.sdm.domain;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @AttributeOverride(name = "uuid", column = @Column(name = "uuid", updatable = false))
 @Table(name = "attributes")
 public class Attributes extends AbstractEntity{
     private static final long serialVersionUID = 9187855247587310623L;
 
     @NonNull
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="contract_uuid", nullable = false, foreignKey = @ForeignKey(name = "attributes_object_to_attributes_fk"))
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="contract_uuid", nullable = false, foreignKey = @ForeignKey(name = "attributes__object_to_attributes_fk"))
     private ObjectToAttributes objectToAttributes;
 
     @NonNull

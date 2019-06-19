@@ -1,13 +1,10 @@
 package ru.shapovalov.sdm.domain;
 
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
 
-@Data
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
     private static final long serialVersionUID = -5023671718747011050L;
@@ -17,4 +14,11 @@ public abstract class AbstractEntity implements Serializable {
     @Column(name = "object_uuid")
     @Comment(text = "Уникальный идентификатор")
     private UUID uuid;
+
+    public UUID getUuid() {
+        return uuid;
+    }
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
 }
