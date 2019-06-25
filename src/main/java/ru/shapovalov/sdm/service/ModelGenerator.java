@@ -1,36 +1,37 @@
-package ru.shapovalov.sdm;
+package ru.shapovalov.sdm.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Service;
-import ru.shapovalov.sdm.domain.Objects;
-import ru.shapovalov.sdm.repository.AttributesRepository;
-import ru.shapovalov.sdm.repository.ObjectToAttributesRepository;
-import ru.shapovalov.sdm.repository.ObjectsRepository;
-import ru.shapovalov.sdm.repository.ParametersRepository;
+import org.springframework.stereotype.Component;
+import ru.shapovalov.sdm.domain.Object;
 
+import javax.transaction.Transactional;
 import java.lang.reflect.Field;
 import java.util.Collection;
 
-@Service
+@Transactional
+@Component
 public class ModelGenerator {
     private static final Logger LOG = LoggerFactory.getLogger(ModelGenerator.class);
 
-    private final AttributesRepository attributesRepository;
+    private final AttributeService attributeService;
 
-    private final ObjectsRepository objectsRepository;
+    private final ObjectService objectService;
 
-    private final ObjectToAttributesRepository objectToAttributesRepository;
+    private final ObjectToAttributeService objectToAttributeService;
 
-    private final ParametersRepository parametersRepository;
+    private final ParameterService parameterService;
 
-    public ModelGenerator(AttributesRepository attributesRepository, ObjectsRepository objectsRepository, ObjectToAttributesRepository objectToAttributesRepository, ParametersRepository parametersRepository) {
-        this.attributesRepository = attributesRepository;
-        this.objectsRepository = objectsRepository;
-        this.objectToAttributesRepository = objectToAttributesRepository;
-        this.parametersRepository = parametersRepository;
+    public ModelGenerator(AttributeService attributeService,
+                          ObjectService objectService,
+                          ObjectToAttributeService objectToAttributeService,
+                          ParameterService parameterService) {
+        this.attributeService = attributeService;
+        this.objectService = objectService;
+        this.objectToAttributeService = objectToAttributeService;
+        this.parameterService = parameterService;
     }
 
     @EventListener(ContextRefreshedEvent.class)
@@ -52,7 +53,7 @@ public class ModelGenerator {
                 LOG.info("ParentType: " + parentType);
             }
 
-            Objects objects = new Objects();
+            Object object = new Object();
 
             generateAttribute(cl);
         }

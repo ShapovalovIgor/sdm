@@ -7,16 +7,17 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
+@Entity
 @Getter
 @Setter
 @AttributeOverride(name = "uuid", column = @Column(name = "uuid", updatable = false))
-@Table(name = "objects")
-public class Objects extends AbstractEntity {
+@Table(name = "object")
+public class Object extends AbstractEntity {
     private static final long serialVersionUID = 8030321545840126735L;
 
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="parent_uuid", nullable = true, foreignKey = @ForeignKey(name = "objects__objects_fk"))
-    private Objects parent;
+    private Object parent;
 
     @NonNull
     @Column(name = "name")
@@ -33,8 +34,8 @@ public class Objects extends AbstractEntity {
     private int orderNumber;
 
     @OneToMany(mappedBy = "uuid", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Objects> childrenList;
+    private List<Object> childrenList;
 
     @OneToMany(mappedBy = "objectId", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<ObjectToAttributes> objetToAttributeList;
+    private List<ObjectToAttribute> objetToAttributeList;
 }

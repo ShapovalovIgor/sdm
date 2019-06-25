@@ -1,4 +1,4 @@
-package ru.shapovalov.sdm;
+package ru.shapovalov.sdm.service;
 
 import org.reflections.Reflections;
 

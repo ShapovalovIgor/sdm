@@ -7,11 +7,12 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
+@Entity
 @Getter
 @Setter
 @AttributeOverride(name = "uuid", column = @Column(name = "uuid", updatable = false))
-@Table(name = "parameters")
-public class Parameters extends AbstractEntity{
+@Table(name = "parameter")
+public class Parameter extends AbstractEntity{
     private static final long serialVersionUID = -8292643106420202229L;
 
     @NonNull
@@ -28,6 +29,6 @@ public class Parameters extends AbstractEntity{
     @Column(name = "order_number", nullable = false)
     private int orderNumber;
 
-    @OneToMany(mappedBy = "parameters.uuid", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Parameters> parametersList;
+    @OneToMany(mappedBy = "uuid",  fetch = FetchType.LAZY)
+    private List<Parameter> parameterList;
 }
