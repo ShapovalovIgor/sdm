@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import ru.shapovalov.sdm.domain.Attribute;
 import ru.shapovalov.sdm.domain.Object;
 
 import javax.transaction.Transactional;
@@ -60,8 +61,7 @@ public class ModelGenerator {
     }
 
 
-    private StringBuilder generateAttribute(Class<?> cl) {
-        StringBuilder fieldsSB = new StringBuilder();
+    private void generateAttribute(Class<?> cl) {
         Field[] fields = cl.getDeclaredFields();
 
         for (Field field : fields) {
@@ -69,6 +69,12 @@ public class ModelGenerator {
            type.getName();
         }
         LOG.info("length: " + fields.length);
-        return fieldsSB;
+    }
+
+    private void fillTypeObject(Class<?> cl) {
+       String type = cl.getSimpleName();
+        Attribute attribute = new Attribute();
+        attribute.setName(type);
+//        attribute.setAttributeManagement();
     }
 }

@@ -10,7 +10,6 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@AttributeOverride(name = "uuid", column = @Column(name = "uuid", updatable = false))
 @Table(name = "parameter")
 public class Parameter extends AbstractEntity{
     private static final long serialVersionUID = -8292643106420202229L;

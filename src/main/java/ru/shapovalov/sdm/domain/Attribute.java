@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@AttributeOverride(name = "uuid", column = @Column(name = "uuid", updatable = false))
 @Table(name = "attribute")
 public class Attribute extends AbstractEntity{
     private static final long serialVersionUID = 9187855247587310623L;
