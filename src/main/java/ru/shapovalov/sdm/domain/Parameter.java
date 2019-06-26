@@ -5,7 +5,6 @@ import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter
@@ -13,6 +12,10 @@ import java.util.List;
 @Table(name = "parameter")
 public class Parameter extends AbstractEntity{
     private static final long serialVersionUID = -8292643106420202229L;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="attribute", nullable = false, foreignKey = @ForeignKey(name = "parameter__attribute_fk"))
+    private Attribute attribute;
 
     @NonNull
     @Column(name = "name")
@@ -27,7 +30,4 @@ public class Parameter extends AbstractEntity{
 
     @Column(name = "order_number", nullable = false)
     private int orderNumber;
-
-    @OneToMany(mappedBy = "uuid",  fetch = FetchType.LAZY)
-    private List<Parameter> parameterList;
 }

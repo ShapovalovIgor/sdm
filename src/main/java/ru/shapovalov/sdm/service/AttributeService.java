@@ -34,6 +34,10 @@ public class AttributeService {
             return this.attributeRepository.findById(id);
         }
 
+        public Optional<Attribute> getByNameAndProertyLike(String name, String property) {
+        return this.attributeRepository.findByNameAndPropertiesLike(name, property);
+    }
+
 
         public Optional<Attribute> save(@NotNull Attribute Attribute) {
 

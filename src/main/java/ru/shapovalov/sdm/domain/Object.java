@@ -35,6 +35,7 @@ public class Object extends AbstractEntity {
     @OneToMany(mappedBy = "uuid", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Object> childrenList;
 
-    @OneToMany(mappedBy = "objectId", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<ObjectToAttribute> objetToAttributeList;
+    @OneToMany(mappedBy = "object", fetch = FetchType.LAZY)
+    @Column(name = "attributes")
+    private List<Attribute> attributes;
 }

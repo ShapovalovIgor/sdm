@@ -5,6 +5,7 @@ import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -13,11 +14,9 @@ import javax.persistence.*;
 public class Attribute extends AbstractEntity{
     private static final long serialVersionUID = 9187855247587310623L;
 
-    @JoinColumn(name = "object_to_attribute", nullable = false,
-            foreignKey = @ForeignKey(name = "fk_achievement__achievement_type"))
-    @ManyToOne(fetch = FetchType.LAZY)
-    @NonNull
-    private ObjectToAttribute objectToAttribute;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="object", nullable = false, foreignKey = @ForeignKey(name = "attribute__objects_fk"))
+    private Object object;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="attribute_management_uuid", foreignKey = @ForeignKey(name = "attribute__attribute_fk"))
@@ -29,4 +28,8 @@ public class Attribute extends AbstractEntity{
 
     @Column(name = "properties")
     private String properties;
+
+    @OneToMany(mappedBy = "attribute", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Column(name = "parameters")
+    private List<Parameter> parameters;
 }
